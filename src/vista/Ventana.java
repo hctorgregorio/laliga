@@ -119,7 +119,7 @@ public class Ventana extends JFrame{
 					
 					System.out.println(cajaTexto.getText());
 					LaLiga crearTemporada = new LaLiga();
-					crearTemporada.crearLiga(cajaTexto.getText());
+					crearTemporada.crearLiga(cajaTexto.getText() + ".txt");
 					
 				} else if (e.getActionCommand() == "Seleccionar") {
 					
