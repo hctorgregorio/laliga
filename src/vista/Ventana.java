@@ -1,8 +1,6 @@
 package vista;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -18,14 +16,44 @@ import javax.swing.JTextField;
 import control.LaLiga;
 
 public class Ventana extends JFrame{
-
+	
+	//Esto que es?
+	
+	/**
+	 * 
+	 */
+	/*
+	private static final long serialVersionUID = 1L;
+	*/
+	
 	private JPanel panel;
 	private JLabel etiquetaImagen;
 	private JTextField cajaTexto;
-	private JComboBox menuDesplegable;
+	private JComboBox<String> menuDesplegable;
 	private JButton boton1;
 	private JButton boton2;
-	private ActionListener listener;
+	private ActionListener listener = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getActionCommand() == "Crear Temporada") {
+				
+				System.out.println(cajaTexto.getText());
+				LaLiga crearTemporada = new LaLiga();
+				crearTemporada.crearLiga(cajaTexto.getText() + ".txt");
+				
+			} else if (e.getActionCommand() == "Seleccionar") {
+				
+				System.out.println(menuDesplegable.getSelectedItem());
+				
+			} else {
+				
+				System.out.println("esto no funciona");
+				
+			}
+		}
+	};
 
 	public Ventana() {
 		
@@ -85,9 +113,9 @@ public class Ventana extends JFrame{
 	
 	public void colocarMenuDesplegable() {
 		
-		String[] temporadas = leerTemporadas("C:\\Users\\Hector\\eclipse-workspace\\LaLiga3.0\\ficheros\\temporadas");
+		String[] temporadas = leerTemporadas("ficheros/temporadas");
 		
-		menuDesplegable = new JComboBox(temporadas);
+		menuDesplegable = new JComboBox<String>(temporadas);
 		menuDesplegable.setBounds(150, 425, 150, 25);
 		
 		panel.add(menuDesplegable);
@@ -110,29 +138,6 @@ public class Ventana extends JFrame{
 		panel.add(boton1);
 		panel.add(boton2);
 		
-		listener = new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				if (e.getActionCommand() == "Crear Temporada") {
-					
-					System.out.println(cajaTexto.getText());
-					LaLiga crearTemporada = new LaLiga();
-					crearTemporada.crearLiga(cajaTexto.getText() + ".txt");
-					
-				} else if (e.getActionCommand() == "Seleccionar") {
-					
-					System.out.println(menuDesplegable.getSelectedItem());
-					
-				} else {
-					
-					System.out.println("esto no funciona");
-					
-				}
-			}
-		};
-		
 		boton1.addActionListener(listener);
 		boton2.addActionListener(listener);
 		
@@ -150,4 +155,35 @@ public class Ventana extends JFrame{
 
 		return temporadas;
 	}
+	
+	/*
+	 * VENTANA PRINCIPAL
+	 * 	*Crear temporada
+	 * 
+	 * 		-Cerrar la ventana
+	 * 		-Nueva ventana con la clasificacion (vista1)
+	 * 		-Boton atras (cierra ventana y vuelve al inicio)
+	 * 
+	 * 	*Seleccionar temporada
+	 * 
+	 * 		-Cerrar la ventana
+	 * 		-Nueva ventana con la clasificacion (vista1)
+	 * 		-Boton atras (cierra ventana y vuelve al inicio)
+	 * 
+	 * 	*Seleccionar equipo
+	 * 
+	 * 		-Cerrar ventana
+	 * 		-Nueva ventana con las siguientes opciones (vista2):
+	 * 
+	 * 			*jugadores / seleccionar jugador (vista3)
+	 * 
+	 * 				-Boton atras (cierra ventana y vuelve al inicio)
+	 * 
+	 * 			*estadisticas del equipo (vista4)
+	 * 
+	 * 				-Boton atras (cierra ventana y vuelve al inicio)
+	 * 
+	 * 			*Boton atras (cierra ventana y vuelve al inicio)
+	 * 
+	 */
 }
