@@ -41,8 +41,10 @@ public class Ventana extends JFrame{
 				
 				System.out.println(cajaTexto.getText());
 				LaLiga crearTemporada = new LaLiga();
-				crearTemporada.crearLiga(cajaTexto.getText() + ".txt");
-				
+				crearTemporada.crearLiga(cajaTexto.getText() + ".txt"); //llama al metodo crear liga, para crear una nueva temporada
+				//menuDesplegable.addItem(cajaTexto.getText()); //Implementa el nombre del ultimo registro creado
+
+
 			} else if (e.getActionCommand() == "Seleccionar") {
 				
 				System.out.println(menuDesplegable.getSelectedItem());
@@ -117,6 +119,7 @@ public class Ventana extends JFrame{
 		
 		menuDesplegable = new JComboBox<String>(temporadas);
 		menuDesplegable.setBounds(150, 425, 150, 25);
+		
 		
 		panel.add(menuDesplegable);
 	}
