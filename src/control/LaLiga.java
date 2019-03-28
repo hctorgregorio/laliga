@@ -128,7 +128,7 @@ public class LaLiga {
 						local = segundoGrupo.get(j);
 						visitante = primerGrupo.get(j);
 					}
-					partido = local + "#" + visitante;
+					partido = (i + 1) + "#" + local + "#" + probabilidadGol() + "#" + visitante + "#" + probabilidadGol();
 					jornada.add(partido);
 				} else {
 					
@@ -140,7 +140,7 @@ public class LaLiga {
 						visitante = primerGrupo.get(j);
 					}
 					
-					partido = local + "#" + visitante;
+					partido = (i + 1) + "#" + local + "#" + probabilidadGol() + "#" + visitante + "#" + probabilidadGol();
 					jornada.add(partido);
 				}
 			}
@@ -173,7 +173,7 @@ public HashMap<Integer, ArrayList<String>> segundaVuelta (ArrayList<String> prim
 						local = segundoGrupo.get(j);
 						visitante = primerGrupo.get(j);
 					}
-					partido = local + "#" + visitante;
+					partido = (i + 20) + "#" + local + "#" + probabilidadGol() + "#" + visitante + "#" + probabilidadGol();
 					jornada.add(partido);
 				} else {
 					
@@ -185,7 +185,7 @@ public HashMap<Integer, ArrayList<String>> segundaVuelta (ArrayList<String> prim
 						visitante = primerGrupo.get(j);
 					}
 					
-					partido = local + "#" + visitante;
+					partido = (i + 20) + "#" + local + "#" + probabilidadGol() + "#" + visitante + "#" + probabilidadGol();
 					jornada.add(partido);
 				}
 			}
@@ -194,6 +194,15 @@ public HashMap<Integer, ArrayList<String>> segundaVuelta (ArrayList<String> prim
 		}
 		
 		return jornadasDeLaTemporada;
+	}
+
+	public int probabilidadGol () {
+		
+		int[] goles = {0,0,0,0,0,1,1,1,1,1,2,2,2,2,3,3,3,4,5,6};
+		Random rnd = new Random();
+		int gol = goles[rnd.nextInt(20)];
+		return gol;
+		
 	}
 	
 	public void rodarEquiposDePosicion (ArrayList<String> primerGrupo, ArrayList<String> segundoGrupo) {
@@ -220,7 +229,7 @@ public HashMap<Integer, ArrayList<String>> segundaVuelta (ArrayList<String> prim
 			bw = new BufferedWriter(new FileWriter(escribirPartidos, true));
 			for (Integer clave : jornadasDeLaTemporada.keySet()) {
 				
-				bw.write("JORNADA: " + (clave + 1) + "\n");
+				//bw.write("JORNADA: " + (clave + 1) + "\n");
 				
 				ArrayList<String> jornada = new ArrayList<String>();
 				jornada = jornadasDeLaTemporada.get(clave);
