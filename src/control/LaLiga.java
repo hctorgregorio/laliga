@@ -12,8 +12,16 @@ import java.util.HashMap;
 import java.util.Random;
 
 import modelo.Equipo;
+import vista.VentanaPrincipal;
 
 public class LaLiga {
+	
+	public static void main(String[] args) {
+		
+		// Creamos el objeto ventana que será nuestra ventana principal
+		VentanaPrincipal ventana = new VentanaPrincipal();
+
+	}
 
 	public void crearLiga(String nombreTemporada) {
 		

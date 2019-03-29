@@ -15,17 +15,13 @@ import javax.swing.JTextField;
 
 import control.LaLiga;
 
-public class Ventana extends JFrame{
+public class VentanaPrincipal {
 	
 	//Esto que es?
-	
-	/**
-	 * 
-	 */
 	/*
 	private static final long serialVersionUID = 1L;
 	*/
-	
+	private JFrame ventanaPrincipal;
 	private JPanel panel;
 	private JLabel etiquetaImagen;
 	private JTextField cajaTexto;
@@ -37,17 +33,24 @@ public class Ventana extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
+			LaLiga crearTemporada = new LaLiga();
+			
 			if (e.getActionCommand() == "Crear Temporada") {
 				
 				System.out.println(cajaTexto.getText());
-				LaLiga crearTemporada = new LaLiga();
-				crearTemporada.crearLiga(cajaTexto.getText() + ".txt"); //llama al metodo crear liga, para crear una nueva temporada
-				//menuDesplegable.addItem(cajaTexto.getText()); //Implementa el nombre del ultimo registro creado
-
+				
+				//Creamos la nueva temporada
+				crearTemporada.crearLiga(cajaTexto.getText() + ".txt");
+				VentanaTemporada nuevaVentana = new VentanaTemporada();
+				ventanaPrincipal.dispose();
+				
+			
 
 			} else if (e.getActionCommand() == "Seleccionar") {
 				
 				System.out.println(menuDesplegable.getSelectedItem());
+				VentanaTemporada nuevaVentana = new VentanaTemporada();
+				ventanaPrincipal.dispose();
 				
 			} else {
 				
@@ -57,23 +60,18 @@ public class Ventana extends JFrame{
 		}
 	};
 
-	public Ventana() {
+	public VentanaPrincipal() {
 		
-		this.setSize(600, 600);
-		this.setMinimumSize(new Dimension(600, 600));
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		this.setTitle("LaLiga");
-		this.setLocationRelativeTo(null);
+		//Constructor de ventana Principal
+		ventanaPrincipal = new JFrame();
+		ventanaPrincipal.setSize(600, 600);
+		ventanaPrincipal.setMinimumSize(new Dimension(600, 600));
+		ventanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		ventanaPrincipal.setTitle("LaLiga");
+		ventanaPrincipal.setLocationRelativeTo(null);
 		 
 		iniciarVentana();
 		
-	}
-	
-	public static void main(String[] args) {
-		
-		Ventana ventana = new Ventana();
-		
-		ventana.setVisible(true);
 	}
 	
 	public void iniciarVentana() {
@@ -83,7 +81,9 @@ public class Ventana extends JFrame{
 		colocarImagen();
 		colocarCajaDeTexto();
 		colocarMenuDesplegable();
-		colocarBotnones();
+		colocarBotones();
+		//hacemos visible la ventana y sus componentes
+		ventanaPrincipal.setVisible(true);
 		
 	}
 	
@@ -92,7 +92,7 @@ public class Ventana extends JFrame{
 		//Estructura del panel
 		panel = new JPanel();
 		panel.setLayout(null); //Desactivar el diseño
-		this.getContentPane().add(panel); //Agregar el panel a la ventana, this se refiere a la ventana creada
+		ventanaPrincipal.getContentPane().add(panel); //Agregar el panel a la ventana, this se refiere a la ventana creada
 	}
 
 	public void colocarImagen() {
@@ -124,7 +124,7 @@ public class Ventana extends JFrame{
 		panel.add(menuDesplegable);
 	}
 	
-	public void colocarBotnones() {
+	public void colocarBotones() {
 		
 		//boton crear Temporada
 		boton1 = new JButton();//Se puede añadir texto al boton dentro del parentesis JButton("texto")
